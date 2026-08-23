@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <Folder Include="Implementation\" />
+    <Folder Include="Mappers\" />
     <Folder Include="Persistence\Data\" />
     <Folder Include="Persistence\Entities\" />
   </ItemGroup>
