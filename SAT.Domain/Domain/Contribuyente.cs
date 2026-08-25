@@ -27,10 +27,10 @@ namespace SAT.Domain.Domain
             RFC = rfc;
         }
 
-        public void CrearRFC()
+        public void GenerarRfc()
         {
             string dato = "";
-            if (ApellidoPaterno != null)
+            if (!string.IsNullOrEmpty(ApellidoPaterno))
             {
                 try
                 {
@@ -44,7 +44,7 @@ namespace SAT.Domain.Domain
                 }
                 RFC = $"{FirstLetter(dato)}{SecondLetter(dato)}";
             }
-            if (ApellidoMaterno != null)
+            if (!string.IsNullOrEmpty(ApellidoMaterno))
             {
                 try
                 {
@@ -63,7 +63,7 @@ namespace SAT.Domain.Domain
                 ApellidoMaterno = "";
                 RFC += "X";
             }
-            if (Nombre != null)
+            if (!string.IsNullOrEmpty(Nombre))
             {
                 dato = Nombre.ToUpper().Trim();
                 RFC += $"{FirstLetterName(dato)}";
