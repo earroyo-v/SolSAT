@@ -1,0 +1,16 @@
+﻿--===========CREAR_TABLA_RFC========================
+USE GENERACION33
+CREATE TABLE RFC
+(
+IdUser INT IDENTITY(1,1) PRIMARY KEY,
+Nombre VARCHAR(100) NOT NULL,
+ApellidoPaterno VARCHAR(100) NOT NULL,
+ApellidoMaterno VARCHAR(100) NULL,
+FechaNacimiento DATETIME NOT NULL,
+RFC VARCHAR(100)
+)
+
+--===========SCAFFOLD_TABLA_RFC========================
+cd SAT.Infrastructure/Persistence
+
+Scaffold-DbContext "Server=.;Database=GENERACION33;Trusted_Connection=True;TrustServerCertificate=True;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Persistence/Entities -ContextDir Persistence/Data -Context AppDbContext -Tables RFC -DataAnnotations -Force
