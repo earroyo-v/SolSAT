@@ -8,11 +8,11 @@ namespace SAT.Application.Services.Contribuyente.DTO
 {
     public class ContribuyenteDTO
     {
-        public int IdUser { get; private set; }
-        public string Nombre { get; private set; } = null!;
-        public string ApellidoPaterno { get; private set; } = null!;
-        public string ApellidoMaterno { get; private set; } = null!;
-        public DateTime FechaNacimiento { get; private set; }
-        public string? RFC { get; private set; }
+        public int IdUser { get; set; }
+        public string Nombre { get; set; } = null!;
+        public string ApellidoPaterno { get; set; } = null!;
+        public string ApellidoMaterno { get; set; } = null!;
+        public DateTime FechaNacimiento { get; set; }
+        public string? RFC { get; set; }
     }
 }

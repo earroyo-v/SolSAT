@@ -13,7 +13,7 @@ namespace SAT.Application.Services.Contribuyente
 {
     public class ContribuyenteService : IContribuyenteService
     {
-        IContribuyenteRepository _contribuyenteRepository;
+        private readonly IContribuyenteRepository _contribuyenteRepository;
         public ContribuyenteService(IContribuyenteRepository contribuyenteRepository)
         {
             _contribuyenteRepository = contribuyenteRepository;

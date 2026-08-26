@@ -12,7 +12,7 @@ namespace SAT.Infrastructure.Implementation
 {
     public class ContribuyenteImp : IContribuyenteRepository
     {
-        AppDbContext _context;
+        private readonly AppDbContext _context;
         public ContribuyenteImp(AppDbContext context)
         {
             _context = context;
