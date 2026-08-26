@@ -27,6 +27,11 @@ namespace SAT.Domain.Domain
             RFC = rfc;
         }
 
+        public Contribuyente Create(int idUser, string nombre, string apellidoPaterno, string apellidoMaterno, DateTime fechaNacimiento, string? rfc)
+        {
+            return new Contribuyente(idUser, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, rfc);
+        }
+
         public void GenerarRfc()
         {
             string dato = "";

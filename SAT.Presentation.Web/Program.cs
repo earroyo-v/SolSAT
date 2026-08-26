@@ -1,4 +1,15 @@
+using Microsoft.EntityFrameworkCore;
+using SAT.Application.Repositories;
+using SAT.Application.Services.Contribuyente;
+using SAT.Infrastructure.Persistence.Data;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IContribuyenteService, ContribuyenteService>();
+builder.Services.AddScoped<IContribuyenteRepository, IContribuyenteRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
