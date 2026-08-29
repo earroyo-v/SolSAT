@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Infrastructure", "SAT.I
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Domain.Tests", "SAT.Domain.Tests\SAT.Domain.Tests.csproj", "{8A66AC90-9E8F-4BC3-A1CF-B78F9FB7CB9E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Application.Tests", "SAT.Application.Tests\SAT.Application.Tests.csproj", "{885045E7-BDBB-4211-9109-41FFCE09A10A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +41,10 @@ Global
 		{8A66AC90-9E8F-4BC3-A1CF-B78F9FB7CB9E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{8A66AC90-9E8F-4BC3-A1CF-B78F9FB7CB9E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{8A66AC90-9E8F-4BC3-A1CF-B78F9FB7CB9E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{885045E7-BDBB-4211-9109-41FFCE09A10A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{885045E7-BDBB-4211-9109-41FFCE09A10A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{885045E7-BDBB-4211-9109-41FFCE09A10A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{885045E7-BDBB-4211-9109-41FFCE09A10A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
