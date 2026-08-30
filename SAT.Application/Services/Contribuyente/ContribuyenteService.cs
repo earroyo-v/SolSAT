@@ -1,4 +1,5 @@
-﻿using SAT.Application.Repositories;
+﻿using SAT.Application.Common;
+using SAT.Application.Repositories;
 using SAT.Application.Services.Contribuyente.DTO;
 using SAT.Application.Services.Contribuyente.Mappers;
 using SAT.Domain.Domain
@@ -19,8 +20,17 @@ namespace SAT.Application.Services.Contribuyente
         {
             _contribuyenteRepository = contribuyenteRepository;
         }
-        public async Task CrearRFC(ContribuyenteDTO user)
+        public async Task<Respuesta<ContribuyenteDTO>> CrearRFC(ContribuyenteDTO user)
         {
+            if (user is null)
+            {
+                return new Respuesta<ContribuyenteDTO>
+                {
+                    Exito = false,
+                    Mensaje = "Datos de contribuyente inválidos.",
+                    Error = "El objeto ContribuyenteDTO es nulo."
+                };
+            }
             try
             {
                 // Se asume que el tipo correcto es SAT.Domain.Domain.Contribuyente
@@ -29,10 +39,22 @@ namespace SAT.Application.Services.Contribuyente
                 rfc.GenerarRfc();
 
                 await _contribuyenteRepository.Create(rfc);
+
+                return new Respuesta<ContribuyenteDTO>
+                {
+                    Exito = true,
+                    Item = rfc.ToDTO(),
+                    Mensaje = "Contribuyente creado exitosamente"
+                };
             }
             catch
             {
-                throw new Exception("Error al crear el contribuyente");
+                return new Respuesta<ContribuyenteDTO>
+                {
+                    Exito = false,
+                    Mensaje = "Error al crear el contribuyente",
+                    Error = "No fue posible registrar el contribuyente."
+                };
             }
         }
     }

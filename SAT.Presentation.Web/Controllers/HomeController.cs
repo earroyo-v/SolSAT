@@ -28,8 +28,8 @@ namespace SAT.Presentation.Web.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateRfc([FromBody] SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO contribuyente)
         {
-            await _contribuyenteService.CrearRFC(contribuyente);
-            return Json(new { Rfc = "Your RFC here" });
+            var response = await _contribuyenteService.CrearRFC(contribuyente);
+            return Json(response);
         }
         [HttpPost]
         public async Task<IActionResult> EditRfc()

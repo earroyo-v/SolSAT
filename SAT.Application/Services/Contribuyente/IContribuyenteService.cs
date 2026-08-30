@@ -1,4 +1,5 @@
-﻿using SAT.Application.Services.Contribuyente.DTO;
+﻿using SAT.Application.Common;
+using SAT.Application.Services.Contribuyente.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,7 @@ namespace SAT.Application.Services.Contribuyente
 {
     public interface IContribuyenteService
     {
-        public Task CrearRFC(ContribuyenteDTO user);
+        public Task<Respuesta<ContribuyenteDTO>> CrearRFC(ContribuyenteDTO user);
         //List<E_RFC> ReadAll();
         //E_RFC ReadOne(int idUser);
         //List<E_RFC> ReadCustom(string data);
