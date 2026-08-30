@@ -16,18 +16,30 @@ namespace SAT.Presentation.Web.Controllers
             _contribuyenteService = contribuyenteService;
         }
 
-        public async Task<IActionResult> Index()
-        {
-            await _contribuyenteService.CrearRFC(new SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO
-            {
-                IdUser = 0,
-                Nombre = "Juan",
-                ApellidoPaterno = "Perez",
-                ApellidoMaterno = "Gomez",
-                FechaNacimiento = new DateTime(1990, 1, 1),
-                RFC = null
-            });
+        public IActionResult Index()
+        {            
             return View();
+        }
+        [HttpGet]
+        public async Task<IActionResult> GetRfc()
+        {
+            return Json(new { Rfc = "Your RFC here" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> CreateRfc([FromBody] SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO contribuyente)
+        {
+            await _contribuyenteService.CrearRFC(contribuyente);
+            return Json(new { Rfc = "Your RFC here" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> EditRfc()
+        {
+            return Json(new { Rfc = "Your RFC here" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> DeleteRfc()
+        {
+            return Json(new { Rfc = "Your RFC here" });
         }
 
         public IActionResult Privacy()
