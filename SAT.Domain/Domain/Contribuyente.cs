@@ -27,9 +27,13 @@ namespace SAT.Domain.Domain
             RFC = rfc;
         }
 
-        public Contribuyente Create(int idUser, string nombre, string apellidoPaterno, string apellidoMaterno, DateTime fechaNacimiento, string? rfc)
+        public Contribuyente Create()
         {
-            return new Contribuyente(idUser, nombre, apellidoPaterno, apellidoMaterno, fechaNacimiento, rfc);
+            if (string.IsNullOrEmpty(Nombre) || string.IsNullOrEmpty(ApellidoPaterno) || FechaNacimiento == null)
+            {
+                throw new ArgumentException("Nombre, Apellido Paterno y Fecha de Nacimiento son obligatorios.");
+            }
+            return new Contribuyente(IdUser, Nombre, ApellidoPaterno, ApellidoMaterno, FechaNacimiento, RFC);
         }
 
         public void GenerarRfc()

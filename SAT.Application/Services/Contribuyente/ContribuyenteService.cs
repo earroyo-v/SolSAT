@@ -1,5 +1,6 @@
 ﻿using SAT.Application.Repositories;
 using SAT.Application.Services.Contribuyente.DTO;
+using SAT.Application.Services.Contribuyente.Mappers;
 using SAT.Domain.Domain
     ;
 using System;
@@ -23,14 +24,7 @@ namespace SAT.Application.Services.Contribuyente
             try
             {
                 // Se asume que el tipo correcto es SAT.Domain.Domain.Contribuyente
-                var rfc = new SAT.Domain.Domain.Contribuyente(
-                    0,
-                    user.Nombre,
-                    user.ApellidoPaterno,
-                    user.ApellidoMaterno,
-                    user.FechaNacimiento,
-                    null
-                );
+                var rfc = user.ToDomain();
                 // Act
                 rfc.GenerarRfc();
 

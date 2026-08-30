@@ -1,5 +1,6 @@
 ﻿using SAT.Application.Repositories;
 using SAT.Domain.Domain;
+using SAT.Infrastructure.Mappers;
 using SAT.Infrastructure.Persistence.Data;
 using SAT.Infrastructure.Persistence.Entities;
 using System;
@@ -21,14 +22,7 @@ namespace SAT.Infrastructure.Implementation
         {
             try
             {
-                var rfc = new Rfc
-                {
-                    Nombre = user.Nombre,
-                    ApellidoPaterno = user.ApellidoPaterno,
-                    ApellidoMaterno = user.ApellidoMaterno,
-                    FechaNacimiento = user.FechaNacimiento,
-                    Rfc1 = user.RFC
-                };
+                var rfc = user.ToEntity();
                 _context.Add(rfc);
                 await _context.SaveChangesAsync();
             }
