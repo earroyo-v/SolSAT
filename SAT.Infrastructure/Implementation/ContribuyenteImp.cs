@@ -1,4 +1,5 @@
-﻿using SAT.Application.Repositories;
+﻿using Microsoft.EntityFrameworkCore;
+using SAT.Application.Repositories;
 using SAT.Domain.Domain;
 using SAT.Infrastructure.Mappers;
 using SAT.Infrastructure.Persistence.Data;
@@ -25,6 +26,19 @@ namespace SAT.Infrastructure.Implementation
                 var rfc = user.ToEntity();
                 _context.Add(rfc);
                 await _context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new Exception("Error al crear el contribuyente");
+            }
+        }
+
+        public async Task<List<Contribuyente>> ReadAll()
+        {
+            try
+            {
+                var rfcs = await _context.Rfcs.ToListAsync();
+                return rfcs.Select(r => r.ToDomain()).ToList();
             }
             catch
             {

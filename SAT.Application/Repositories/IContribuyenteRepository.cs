@@ -10,7 +10,7 @@ namespace SAT.Application.Repositories
     public interface IContribuyenteRepository
     {
         public Task Create(Contribuyente user);
-        //List<E_RFC> ReadAll();
+        public Task<List<Contribuyente>> ReadAll();
         //E_RFC ReadOne(int idUser);
         //List<E_RFC> ReadCustom(string data);
         //void Update(E_RFC user);
