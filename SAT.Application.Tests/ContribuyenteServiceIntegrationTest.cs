@@ -42,5 +42,17 @@ namespace SAT.Application.Tests
             Assert.NotNull(saved);
             Assert.False(string.IsNullOrEmpty(saved.Rfc1));
         }
+        [Fact]
+        public async Task ObtenerRFC()
+        {
+            var rfcs = await _service.ObtenerTodos();
+
+            // Assert
+            Assert.NotNull(rfcs);
+            Assert.Contains(rfcs.Item, r =>
+                r.Nombre == "Juan" &&
+                r.ApellidoPaterno == "Perez" &&
+                !string.IsNullOrEmpty(r.RFC));
+        }
     }
 }
