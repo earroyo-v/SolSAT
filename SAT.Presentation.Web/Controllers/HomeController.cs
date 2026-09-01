@@ -15,7 +15,7 @@ namespace SAT.Presentation.Web.Controllers
             _logger = logger;
             _contribuyenteService = contribuyenteService;
         }
-
+        [HttpGet("/")]
         public IActionResult Index()
         {            
             return View();
@@ -23,7 +23,8 @@ namespace SAT.Presentation.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GetRfc()
         {
-            return Json(new { Rfc = "Your RFC here" });
+            var response = await _contribuyenteService.ObtenerTodos();
+            return Json(response);
         }
         [HttpPost]
         public async Task<IActionResult> CreateRfc([FromBody] SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO contribuyente)
