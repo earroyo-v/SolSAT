@@ -20,7 +20,7 @@ namespace SAT.Application.Services.Contribuyente
         {
             _contribuyenteRepository = contribuyenteRepository;
         }
-        public async Task<Respuesta<List<ContribuyenteDTO>>> ObtenerTodos(CancellationToken cancellationToken = default)
+        public async Task<Respuesta<List<ContribuyenteDTO>>> ObtenerTodos()
         {
             var dominios = await _contribuyenteRepository.ReadAll();
             var dtos = dominios.Select(d => d.ToDTO()).ToList(); // o usar AutoMapper
