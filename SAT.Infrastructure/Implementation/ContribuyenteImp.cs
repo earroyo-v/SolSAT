@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SAT.Application.Repositories;
+using SAT.Application.Services.Contribuyente.DTO;
 using SAT.Domain.Domain;
 using SAT.Infrastructure.Mappers;
 using SAT.Infrastructure.Persistence.Data;
@@ -33,12 +34,13 @@ namespace SAT.Infrastructure.Implementation
             }
         }
 
-        public async Task<List<Contribuyente>> ReadAll()
+        public async Task<List<ContribuyenteDTO>> ReadAll()
         {
             try
             {
-                var rfcs = await _context.Rfcs.ToListAsync();
-                return rfcs.Select(r => r.ToDomain()).ToList();
+                var rfcs = await _context.Rfcs.AsNoTracking().ToListAsync();
+                return rfcs.Select(r => r.ToDTO()).ToList();
+                //return rfcs.Select(r => r.ToDomain()).ToList();
             }
             catch
             {

@@ -23,12 +23,13 @@ namespace SAT.Application.Services.Contribuyente
         public async Task<Respuesta<List<ContribuyenteDTO>>> ObtenerTodos()
         {
             var dominios = await _contribuyenteRepository.ReadAll();
-            var dtos = dominios.Select(d => d.ToDTO()).ToList(); // o usar AutoMapper
+            //var dtos = dominios.Select(d => d.ToDTO()).ToList(); // o usar AutoMapper
             return new Respuesta<List<ContribuyenteDTO>>
             {
                 Exito = true,
                 Mensaje = "Lista recuperada",
-                Item = dtos
+                //Item = dtos
+                Item = dominios
             };
         }
         public async Task<Respuesta<ContribuyenteDTO>> CrearRFC(ContribuyenteDTO user)

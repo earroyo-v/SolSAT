@@ -1,4 +1,5 @@
-﻿using SAT.Domain.Domain;
+﻿using SAT.Application.Services.Contribuyente.DTO;
+using SAT.Domain.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace SAT.Application.Repositories
     public interface IContribuyenteRepository
     {
         public Task Create(Contribuyente user);
-        public Task<List<Contribuyente>> ReadAll();
+        public Task<List<ContribuyenteDTO>> ReadAll();
         //E_RFC ReadOne(int idUser);
         //List<E_RFC> ReadCustom(string data);
         //void Update(E_RFC user);
