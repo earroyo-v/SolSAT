@@ -2,6 +2,9 @@
     ViewData["Title"] = "Home Page";
 }
 
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+
 <div class="text-center">
     @* <h1 class="display-4">Welcome</h1>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
@@ -19,42 +22,68 @@
     </table>
 </div>
 
+@await Html.PartialAsync("_modalContribuyente")
+
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function(){
+            let url = '';
+            let messageSuccess = {};
+
             fetchData();
 
             document.querySelector('.btnCrear').addEventListener('click', function(){
-                //abrir modal
+                show_modal();
+                url = '/crear-rfc';
+                messageSuccess = {
+                    title: "¡Contribuyenete Creado!",
+                    text: "El Contribuyenete se creo con éxito."
+                };
+            });
+
+            document.getElementById('formContacto').addEventListener('submit', function(event){
+                event.preventDefault();
+                const formData = new FormData(this);
+                addOrCreate(formData, url, messageSuccess);
+                
             });
         });
-        function addOrCreate(){
-            const nombre = prompt("Ingrese el nombre:");
-            const apellidoPaterno = prompt("Ingrese el apellido paterno:");
-            const apellidoMaterno = prompt("Ingrese el apellido materno:");
-            const fechaNacimiento = prompt("Ingrese la fecha de nacimiento (YYYY-MM-DD):");
-            const rfc = prompt("Ingrese el RFC:");
-            if(nombre && apellidoPaterno && apellidoMaterno && fechaNacimiento && rfc){
-                fetch('/crear-rfc', {
+        function show_modal(){
+            const modal = new bootstrap.Modal(document.getElementById('miModalAdd'));
+            modal.show();
+        }
+        function hide_modal(){
+            const modal = bootstrap.Modal.getInstance(document.getElementById('miModalAdd'));
+            modal.hide();
+        }
+        function addOrCreate(formData, url, messageSuccess){
+            for (const [key, value] of formData.entries()) {
+                console.log(key, value);
+            }
+            if(formData.get('Nombre') && formData.get('ApellidoPaterno') && formData.get('FechaNacimiento')){                
+                fetch(url, {
                     method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({
-                        nombre: nombre,
-                        apellidoPaterno: apellidoPaterno,
-                        apellidoMaterno: apellidoMaterno,
-                        fechaNacimiento: fechaNacimiento,
-                        rfc: rfc
-                    })
+                    body: formData
                 })
                 .then(response => response.json())
                 .then(data => {
                     if(data.Exito != false){
-                        alert('Registro creado exitosamente');
-                        fetchData(); // Refresh the table
+                        fetchData();
+                        hide_modal();
+                        Swal.fire({
+                            title: messageSuccess.title,
+                            text: messageSuccess.text,
+                            icon: "success",
+                            confirmButtonText: "Aceptar"
+                        });
                     } else {
-                        alert(data.Mensaje);
+                        Swal.fire({
+                            title: "¡Error!",
+                            text: data.Mensaje,
+                            icon: "error",
+                            confirmButtonText: "Aceptar"
+                        });
                     }
                 })
                 .catch(error => console.error('Error creating record:', error));
@@ -68,7 +97,7 @@
                 .then(data => {
                     if(data.Exito != false){
                         const tableBody = document.getElementById('tableBody');
-                        tableBody.innerHTML = ''; // Clear existing rows
+                        tableBody.innerHTML = '';
                         data.item.forEach(persona => {
                             const row = document.createElement('tr');
                             row.innerHTML = `
@@ -76,7 +105,7 @@
                                 <td>${persona.viewFechaNacimiento}</td>
                                 <td>${persona.rfc}</td>
                                 <td><button class="btn btn-primary btnEditar" data-id="${persona.idUser}">EDITAR</button>
-                                <button class="btn btn-danger btnEliminar" data-id="${persona.idUser}">BORRAR</button></td>
+                                <button class="btn btn-danger btnEliminar" data-id="${persona.idUser}">DELETE</button></td>
                             `;
                             tableBody.appendChild(row);
                         });

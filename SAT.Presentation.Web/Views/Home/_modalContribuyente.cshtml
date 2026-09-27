@@ -1,0 +1,44 @@
+﻿@model SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO
+
+<div class="modal" id="miModalAdd" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <form asp-action="" asp-controller="" asp-antiforgery="true" autocomplete="off" id="formContacto" method="post" enctype="multipart/form-data">
+                <div class="modal-header">
+                    <h5 class="modal-title">Crear Contribuyente</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="modal-body">
+                        <input type="hidden" name="IdContacto" id="IdUser" />
+                        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                        <div class="mb-3">
+                            @* <label asp-for="Nombre" class="form-label">Titulo</label> *@
+                            <input asp-for="Nombre" class="form-control" placeholder="Nombre">
+                            <span asp-validation-for="Nombre" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            @* <label asp-for="ApellidoPaterno" class="form-label">Descripcion</label> *@
+                            <input asp-for="ApellidoPaterno" class="form-control" placeholder="Apellido Paterno">
+                            <span asp-validation-for="ApellidoPaterno" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            @* <label asp-for="ApellidoMaterno" class="form-label">Descripcion</label> *@
+                            <input asp-for="ApellidoMaterno" class="form-control" placeholder="Apellido Materno">
+                            <span asp-validation-for="ApellidoMaterno" class="text-danger"></span>
+                        </div>
+                        <div class="mb-3">
+                            @* <label asp-for="FechaNacimiento" class="form-label">Descripcion</label> *@
+                            <input asp-for="FechaNacimiento" class="form-control" type="date">
+                            <span asp-validation-for="FechaNacimiento" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
+                    <button id="btnAdd" type="submit" class="btn btn-success">Create</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
