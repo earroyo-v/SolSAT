@@ -13,6 +13,7 @@ namespace SAT.Application.Services.Contribuyente.DTO
         public string ApellidoPaterno { get; set; } = null!;
         public string ApellidoMaterno { get; set; } = null!;
         public DateTime FechaNacimiento { get; set; }
+        public string ViewFechaNacimiento => FechaNacimiento.ToString("dd/MM/yyyy");
         public string? RFC { get; set; }
     }
 }
