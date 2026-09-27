@@ -20,7 +20,7 @@ namespace SAT.Presentation.Web.Controllers
         {            
             return View();
         }
-        [HttpGet]
+        [HttpGet("/obtener-rfcs")]
         public async Task<IActionResult> GetRfc()
         {
             var response = await _contribuyenteService.ObtenerTodos();

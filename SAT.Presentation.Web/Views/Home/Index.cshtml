@@ -3,6 +3,24 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    @* <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>NOMBRE</th>
+                <th>FECHA DE NACIMIENTO</th>
+                <th>RFC</th>
+            </tr>
+        </thead>
+        <tbody id="tableBody">
+        </tbody>
+    </table>
 </div>
+
+@section Scripts {
+    <script>
+        // Example JavaScript code
+        console.log("Home page loaded.");
+    </script>
+}
