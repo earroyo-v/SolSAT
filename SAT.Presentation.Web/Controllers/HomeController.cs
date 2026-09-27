@@ -27,7 +27,7 @@ namespace SAT.Presentation.Web.Controllers
             return Json(response);
         }
         [HttpPost("/crear-rfc")]
-        public async Task<IActionResult> CreateRfc([FromBody] SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO contribuyente)
+        public async Task<IActionResult> CreateRfc(SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO contribuyente)
         {
             var response = await _contribuyenteService.CrearRFC(contribuyente);
             return Json(response);
