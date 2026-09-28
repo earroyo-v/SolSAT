@@ -12,10 +12,9 @@ namespace SAT.Application.Repositories
     {
         public Task Create(Contribuyente user);
         public Task<List<ContribuyenteDTO>> ReadAll();
-        //E_RFC ReadOne(int idUser);
-        //List<E_RFC> ReadCustom(string data);
-        //void Update(E_RFC user);
-        //void Delete(int idUser);
+        public Task Update(Contribuyente user);
+        public Task Delete(int id);
+
         //int Count();
     }
 }

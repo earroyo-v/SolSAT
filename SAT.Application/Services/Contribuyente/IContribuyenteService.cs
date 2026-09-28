@@ -12,10 +12,8 @@ namespace SAT.Application.Services.Contribuyente
     {
         public Task<Respuesta<ContribuyenteDTO>> CrearRFC(ContribuyenteDTO user);
         public Task<Respuesta<List<ContribuyenteDTO>>> ObtenerTodos();
-        //E_RFC ReadOne(int idUser);
+        public Task<Respuesta<ContribuyenteDTO>> ActualizarRFC(ContribuyenteDTO user);
+        public Task<Respuesta<bool>> EliminarRFC(int id);
         //List<E_RFC> ReadCustom(string data);
-        //void Update(E_RFC user);
-        //void Delete(int idUser);
-        //int Count();
     }
 }

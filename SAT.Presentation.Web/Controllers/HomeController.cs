@@ -32,15 +32,17 @@ namespace SAT.Presentation.Web.Controllers
             var response = await _contribuyenteService.CrearRFC(contribuyente);
             return Json(response);
         }
-        [HttpPost]
-        public async Task<IActionResult> EditRfc()
+        [HttpPost("/editar-rfc")]
+        public async Task<IActionResult> EditRfc(SAT.Application.Services.Contribuyente.DTO.ContribuyenteDTO contribuyente)
         {
-            return Json(new { Rfc = "Your RFC here" });
+            var response = await _contribuyenteService.ActualizarRFC(contribuyente);
+            return Json(response);
         }
-        [HttpPost]
-        public async Task<IActionResult> DeleteRfc()
+        [HttpPost("/eliminar-rfc")]
+        public async Task<IActionResult> DeleteRfc(int id)
         {
-            return Json(new { Rfc = "Your RFC here" });
+            var response = await _contribuyenteService.EliminarRFC(id); // Replace 1 with the actual ID to delete
+            return Json(response);
         }
 
         public IActionResult Privacy()

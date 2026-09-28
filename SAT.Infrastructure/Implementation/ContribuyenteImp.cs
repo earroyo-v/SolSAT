@@ -46,6 +46,38 @@ namespace SAT.Infrastructure.Implementation
             {
                 throw new Exception("Error al crear el contribuyente");
             }
+        }        
+
+        public async Task Update(Contribuyente user)
+        {
+            try
+            {
+                var rfc = user.ToEntity();
+                _context.Update(rfc);
+                await _context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new Exception("Error al crear el contribuyente");
+            }
+        }
+
+        public async Task Delete(int id)
+        {
+            try
+            {
+                var rfc = await _context.Rfcs.FindAsync(id);
+                if (rfc == null)
+                {
+                    throw new Exception("Contribuyente no encontrado");
+                }
+                _context.Remove(rfc);
+                await _context.SaveChangesAsync();
+            }
+            catch
+            {
+                throw new Exception("Error al crear el contribuyente");
+            }
         }
     }
 }
