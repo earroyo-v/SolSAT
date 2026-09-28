@@ -6,8 +6,6 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
 
 <div class="text-center">
-    @* <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p> *@
     <table class="table table-primary table-striped table-sm">
         <thead>
             <tr>
@@ -27,12 +25,13 @@
 @section Scripts {
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
-        document.addEventListener('DOMContentLoaded', function(){
+        let listUsers = {};
+        document.addEventListener('DOMContentLoaded', async function(){
             let url = '';
             let messageSuccess = {};
 
-            fetchData();
-
+            await fetchData();
+            console.log('listUsers', listUsers);
             document.querySelector('.btnCrear').addEventListener('click', function(){
                 show_modal();
                 url = '/crear-rfc';
@@ -42,11 +41,25 @@
                 };
             });
 
-            document.getElementById('formContacto').addEventListener('submit', function(event){
+            //cuando se presione un elemento de la tabla
+            document.getElementById('tableBody').addEventListener('click', function(event){
+                if(event.target.classList.contains('btnEditar')){
+                    const id = event.target.getAttribute('data-id');
+                    //obtener nombre y apellido
+                    show_modal();
+                    url = `/editar-rfc/`;
+                    messageSuccess = {
+                        title: "¡Contribuyenete Editado!",
+                        text: "El Contribuyenete se edito con éxito."
+                    };
+
+                }
+            });
+
+            document.getElementById('formContacto').addEventListener('submit', async function(event){
                 event.preventDefault();
                 const formData = new FormData(this);
-                addOrCreate(formData, url, messageSuccess);
-                
+                await addOrCreate(formData, url, messageSuccess);
             });
         });
         function show_modal(){
@@ -57,19 +70,19 @@
             const modal = bootstrap.Modal.getInstance(document.getElementById('miModalAdd'));
             modal.hide();
         }
-        function addOrCreate(formData, url, messageSuccess){
+        async function addOrCreate(formData, url, messageSuccess){
             for (const [key, value] of formData.entries()) {
                 console.log(key, value);
             }
-            if(formData.get('Nombre') && formData.get('ApellidoPaterno') && formData.get('FechaNacimiento')){                
-                fetch(url, {
-                    method: 'POST',
-                    body: formData
-                })
-                .then(response => response.json())
-                .then(data => {
+            if(formData.get('Nombre') && formData.get('ApellidoPaterno') && formData.get('FechaNacimiento')){
+                try{
+                    const response = await fetch(url, {
+                        method: 'POST',
+                        body: formData
+                    })
+                    const data = await response.json();
                     if(data.Exito != false){
-                        fetchData();
+                        await fetchData();
                         hide_modal();
                         Swal.fire({
                             title: messageSuccess.title,
@@ -85,35 +98,40 @@
                             confirmButtonText: "Aceptar"
                         });
                     }
-                })
-                .catch(error => console.error('Error creating record:', error));
+                }
+                catch(error){
+                    console.error('Error creating record:', error);
+                }
             } else {
                 alert("Todos los campos son obligatorios.");
             }
         }
-        function fetchData() {
-            fetch('/obtener-rfcs')
-                .then(response => response.json())
-                .then(data => {
-                    if(data.Exito != false){
-                        const tableBody = document.getElementById('tableBody');
-                        tableBody.innerHTML = '';
-                        data.item.forEach(persona => {
-                            const row = document.createElement('tr');
-                            row.innerHTML = `
-                                <td>${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno}</td>
-                                <td>${persona.viewFechaNacimiento}</td>
-                                <td>${persona.rfc}</td>
-                                <td><button class="btn btn-primary btnEditar" data-id="${persona.idUser}">EDITAR</button>
-                                <button class="btn btn-danger btnEliminar" data-id="${persona.idUser}">DELETE</button></td>
-                            `;
-                            tableBody.appendChild(row);
-                        });
-                    } else {
-                        alert(data.Mensaje);
-                    }
-                })
-                .catch(error => console.error('Error fetching data:', error));
+        async function fetchData() {
+            try{
+                const response = await fetch('/obtener-rfcs')
+                const data = await response.json();
+                if(data.Exito != false){
+                    const tableBody = document.getElementById('tableBody');
+                    tableBody.innerHTML = '';
+                    listUsers = data.item;
+                    data.item.forEach(persona => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${persona.nombre} ${persona.apellidoPaterno} ${persona.apellidoMaterno}</td>
+                            <td>${persona.viewFechaNacimiento}</td>
+                            <td>${persona.rfc}</td>
+                            <td><button class="btn btn-primary btnEditar" data-id="${persona.idUser}">EDITAR</button>
+                            <button class="btn btn-danger btnEliminar" data-id="${persona.idUser}">DELETE</button></td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                } else {
+                    alert(data.Mensaje);
+                }
+            }
+            catch(error){
+                console.error('Error fetching data:', error);
+            }
         }
     </script>
 }
