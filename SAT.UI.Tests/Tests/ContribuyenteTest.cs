@@ -22,6 +22,7 @@ namespace SAT.UI.Tests.Tests
 
             var contribuyentePage = new ContribuyentePage(_driver);
 
+            contribuyentePage.WaitForLoaderToDisappear();
             contribuyentePage.ClickCrearButton();
             var nombreModal = contribuyentePage.GetNombreModal();
 

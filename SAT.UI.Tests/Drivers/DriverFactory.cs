@@ -22,8 +22,8 @@ namespace SAT.UI.Tests.Drivers
         public static IWebDriver CreateEdgeDriver()
         {
             var options = new OpenQA.Selenium.Edge.EdgeOptions();
-            options.AddArgument("--headless"); // Run in headless mode
-            options.AddArgument("--disable-gpu"); // Disable GPU acceleration
+            //options.AddArgument("--headless"); // Run in headless mode
+            //options.AddArgument("--disable-gpu"); // Disable GPU acceleration
             options.AddArgument("--window-size=1920,1080"); // Set window size
             return new OpenQA.Selenium.Edge.EdgeDriver(options);
         }

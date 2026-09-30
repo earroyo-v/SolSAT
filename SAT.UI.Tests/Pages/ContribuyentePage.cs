@@ -21,10 +21,17 @@ namespace SAT.UI.Tests.Pages
 
         private IWebElement NombreInput => _driver.FindElement(By.ClassName("btnCrear"));
         private IWebElement NombreTexto => _driver.FindElement(By.ClassName("modal-title"));
+        private IWebElement Loader => _driver.FindElement(By.Id("loading"));
+
+        public void WaitForLoaderToDisappear()
+        {
+            wait.Until(driver => !Loader.Displayed);
+        }
 
         public void ClickCrearButton()
         {
-            NombreInput.Click();
+            var button = wait.Until(driver => NombreInput.Displayed ? NombreInput : null);
+            button.Click();
         }
 
         public string GetNombreModal()
