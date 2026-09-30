@@ -108,6 +108,7 @@
         }
         async function fetchData() {
             try{
+                mostrarLoading();
                 const response = await fetch('/obtener-rfcs')
                 const data = await response.json();
                 if(data.Exito != false){
@@ -131,6 +132,9 @@
             }
             catch(error){
                 console.error('Error fetching data:', error);
+            }
+            finally{
+                ocultarLoading();            
             }
         }
     </script>
