@@ -11,11 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Domain", "SAT.Domain\SA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Infrastructure", "SAT.Infrastructure\SAT.Infrastructure.csproj", "{DB78A048-FDD4-4BDE-B392-208CD2AF8798}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Domain.Tests", "SAT.Domain.Tests\SAT.Domain.Tests.csproj", "{8A66AC90-9E8F-4BC3-A1CF-B78F9FB7CB9E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Tests.Domain", "SAT.Domain.Tests\SAT.Tests.Domain.csproj", "{8A66AC90-9E8F-4BC3-A1CF-B78F9FB7CB9E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Application.Tests", "SAT.Application.Tests\SAT.Application.Tests.csproj", "{885045E7-BDBB-4211-9109-41FFCE09A10A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Tests.Application", "SAT.Application.Tests\SAT.Tests.Application.csproj", "{885045E7-BDBB-4211-9109-41FFCE09A10A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.UI.Tests", "SAT.UI.Tests\SAT.UI.Tests.csproj", "{B9EF2DC2-9A06-422E-B115-729589751C24}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SAT.Tests.UI", "SAT.UI.Tests\SAT.Tests.UI.csproj", "{B9EF2DC2-9A06-422E-B115-729589751C24}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

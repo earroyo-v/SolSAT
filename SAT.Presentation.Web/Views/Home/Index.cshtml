@@ -46,6 +46,12 @@
                 if(event.target.classList.contains('btnEditar')){
                     const id = event.target.getAttribute('data-id');
                     //obtener nombre y apellido
+                    const user = listUsers.find(user => user.idUser == id);
+                    console.log(user);
+                    document.getElementById('Nombre').value = user.nombre;
+                    document.getElementById('ApellidoPaterno').value = user.apellidoPaterno;
+                    document.getElementById('ApellidoMaterno').value = user.apellidoMaterno;
+                    document.getElementById('FechaNacimiento').value = user.fechaNacimiento.split("T")[0];
                     show_modal();
                     url = `/editar-rfc/`;
                     messageSuccess = {
