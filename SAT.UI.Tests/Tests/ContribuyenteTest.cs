@@ -13,13 +13,13 @@ namespace SAT.UI.Tests.Tests
         public void Setup()
         {
             _driver = DriverFactory.CreateEdgeDriver();
+            _driver.Navigate().GoToUrl("http://localhost:8081/");
+            //_driver.Navigate().GoToUrl("https://localhost:44356/");
         }
 
         [Test]
         public void CrearContribuyente()
         {
-            _driver.Navigate().GoToUrl("https://localhost:44356/");
-
             var contribuyentePage = new ContribuyentePage(_driver);
 
             contribuyentePage.WaitForLoaderToDisappear();
