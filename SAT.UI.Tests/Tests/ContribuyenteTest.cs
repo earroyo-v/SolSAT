@@ -24,9 +24,12 @@ namespace SAT.UI.Tests.Tests
 
             contribuyentePage.WaitForLoaderToDisappear();
             contribuyentePage.ClickCrearButton();
-            var nombreModal = contribuyentePage.GetNombreModal();
+            contribuyentePage.FillContribuyenteForm("Juan", "Pérez", "García", "19-01-2001");
+            contribuyentePage.ClickAddButton();
 
-            Assert.That(nombreModal, Is.EqualTo("Crear Contribuyente"));
+            var nombreModal = contribuyentePage.GetNombreSwal();
+
+            Assert.That(nombreModal, Is.EqualTo("¡Contribuyenete Creado!"));
         }
 
         [TearDown]
