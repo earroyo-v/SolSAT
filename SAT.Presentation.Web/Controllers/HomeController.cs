@@ -39,7 +39,7 @@ namespace SAT.Presentation.Web.Controllers
             return Json(response);
         }
         [HttpPost("/eliminar-rfc")]
-        public async Task<IActionResult> DeleteRfc(int id)
+        public async Task<IActionResult> DeleteRfc([FromBody] int id)
         {
             var response = await _contribuyenteService.EliminarRFC(id); // Replace 1 with the actual ID to delete
             return Json(response);
