@@ -33,6 +33,13 @@
             await fetchData();
             console.log('listUsers', listUsers);
             document.querySelector('.btnCrear').addEventListener('click', function(){
+                document.querySelector('.modal-title').textContent = 'Crear Contribuyente';
+                document.getElementById('IdUser').value = '';
+                document.getElementById('Nombre').value = '';
+                document.getElementById('ApellidoPaterno').value = '';
+                document.getElementById('ApellidoMaterno').value = '';
+                document.getElementById('FechaNacimiento').value = '';
+                document.getElementById('btnAdd').textContent = 'Crear';
                 show_modal();
                 url = '/crear-rfc';
                 messageSuccess = {
@@ -48,10 +55,12 @@
                     //obtener nombre y apellido
                     const user = listUsers.find(user => user.idUser == id);
                     console.log(user);
+                    document.querySelector('.modal-title').textContent = 'Editar Contribuyente';
                     document.getElementById('Nombre').value = user.nombre;
                     document.getElementById('ApellidoPaterno').value = user.apellidoPaterno;
                     document.getElementById('ApellidoMaterno').value = user.apellidoMaterno;
                     document.getElementById('FechaNacimiento').value = user.fechaNacimiento.split("T")[0];
+                    document.getElementById('btnAdd').textContent = 'Editar';
                     show_modal();
                     url = `/editar-rfc/`;
                     messageSuccess = {
