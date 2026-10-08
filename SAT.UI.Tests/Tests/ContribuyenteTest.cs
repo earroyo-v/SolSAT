@@ -13,7 +13,7 @@ namespace SAT.UI.Tests.Tests
         public void Setup()
         {
             _driver = DriverFactory.CreateEdgeDriver();
-            _driver.Navigate().GoToUrl("http://localhost:8081/");
+            _driver.Navigate().GoToUrl("https://localhost:9443/");
             //_driver.Navigate().GoToUrl("https://localhost:44356/");
         }
 
@@ -30,6 +30,34 @@ namespace SAT.UI.Tests.Tests
             var nombreModal = contribuyentePage.GetNombreSwal();
 
             Assert.That(nombreModal, Is.EqualTo("¡Contribuyenete Creado!"));
+        }
+        [Test]
+        public void EditarContribuyente()
+        {
+            var contribuyentePage = new ContribuyentePage(_driver);
+
+            contribuyentePage.WaitForLoaderToDisappear();
+            contribuyentePage.ClickLastEditarButton();
+            contribuyentePage.ClearContribuyenteForm();
+            contribuyentePage.FillContribuyenteForm("Juan Edito", "Flores", "Magon", "20-10-1998");
+            contribuyentePage.ClickAddButton();
+
+            var nombreModal = contribuyentePage.GetNombreSwal();
+
+            Assert.That(nombreModal, Is.EqualTo("¡Contribuyenete Editado!"));
+        }
+        [Test]
+        public void EliminarContribuyente()
+        {
+            var contribuyentePage = new ContribuyentePage(_driver);
+
+            contribuyentePage.WaitForLoaderToDisappear();
+            contribuyentePage.ClickLastEliminarButton();
+            contribuyentePage.ClickConfirmDelete();
+
+            var nombreModal = contribuyentePage.GetNombreSwal();
+
+            Assert.That(nombreModal, Is.EqualTo("¡Eliminado!"));
         }
 
         [TearDown]

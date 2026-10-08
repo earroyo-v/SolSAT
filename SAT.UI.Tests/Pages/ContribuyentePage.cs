@@ -1,10 +1,11 @@
-﻿using System;
+﻿using Microsoft.Win32;
+using OpenQA.Selenium;
+using OpenQA.Selenium.Support.UI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Support.UI;
 
 namespace SAT.UI.Tests.Pages
 {
@@ -27,7 +28,12 @@ namespace SAT.UI.Tests.Pages
         private IWebElement ApellidoMaterno => _driver.FindElement(By.Id("ApellidoMaterno"));
         private IWebElement Fecha => _driver.FindElement(By.Id("FechaNacimiento"));
         private IWebElement CrearButton => _driver.FindElement(By.Id("btnAdd"));
-        private IWebElement CreadoText => _driver.FindElement(By.Id("swal2-title"));
+        //private IWebElement CreadoText => _driver.FindElement(By.Id("swal2-title"));
+        private By CreadoText => By.Id("swal2-title");
+        private List<IWebElement> botonesEditar => _driver.FindElements(By.ClassName("btnEditar")).ToList();
+        private List<IWebElement> botonesEliminar => _driver.FindElements(By.ClassName("btnEliminar")).ToList();
+        private IWebElement ConfirmDelete => _driver.FindElement(By.ClassName("swal2-confirm"));
+
 
         public void WaitForLoaderToDisappear()
         {
@@ -48,6 +54,14 @@ namespace SAT.UI.Tests.Pages
             ApellidoMaterno.SendKeys(apellidoMaterno);
             Fecha.SendKeys(fechaNacimiento);
         }
+        public void ClearContribuyenteForm()
+        {
+            wait.Until(driver => Nombre.Displayed);
+            Nombre.Clear();
+            ApellidoPaterno.Clear();
+            ApellidoMaterno.Clear();
+            Fecha.Clear();
+        }
 
         public void ClickAddButton()
         {
@@ -56,13 +70,56 @@ namespace SAT.UI.Tests.Pages
         }
         public string GetNombreSwal()
         {
-            wait.Until(driver => CreadoText.Displayed);
-            return CreadoText.Text;
+            //wait.Until(driver => CreadoText.Displayed);
+            //return CreadoText.Text;
+            var wait = new WebDriverWait(_driver, TimeSpan.FromSeconds(10));
+
+            var swal = wait.Until(driver =>
+            {
+                try
+                {
+                    var element = driver.FindElement(CreadoText);
+
+                    return element.Displayed ? element : null;
+                }
+                catch (NoSuchElementException)
+                {
+                    return null;
+                }
+                catch (StaleElementReferenceException)
+                {
+                    return null;
+                }
+            });
+
+            return swal.Text;
         }
         public string GetNombreModal()
         {
             wait.Until(driver => NombreTexto.Displayed);
             return NombreTexto.Text;
+        }
+
+        public void ClickLastEditarButton()
+        {
+            if (botonesEditar.Any())
+            {
+                botonesEditar.Last().Click();
+            }
+        }
+
+        public void ClickLastEliminarButton()
+        {
+            if (botonesEliminar.Any())
+            {
+                botonesEliminar.Last().Click();
+            }
+        }
+
+        public void ClickConfirmDelete()
+        {
+            wait.Until(driver => ConfirmDelete.Displayed);
+            ConfirmDelete.Click();
         }
     }
 }
